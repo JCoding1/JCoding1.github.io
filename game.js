@@ -4,6 +4,8 @@ let timer = document.getElementById('timer');
 
 let startTime;
 let gameInterval;
+let inertiaX = 0;
+let inertiaY = 0;
 
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
@@ -27,12 +29,14 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     startTime = new Date().getTime();
-    gameInterval = setInterval(updateTimer, 1000);
-    while(checkCollision!= true){
-        window.addEventListener('deviceorientation', handleOrientation, true);
-    }
-    
+    gameInterval = setInterval(updateGame, 16); //60fps
+    window.addEventListener('deviceorientation', handleOrientation, true);
 
+}
+
+function updateGame() {
+    updateTimer();
+    updateBallPosition();
 
 }
 
@@ -43,7 +47,7 @@ function updateTimer() {
 }
 
 function handleOrientation(event) {
-    console.log(event); // später entfernen
+    console.log(event); TODO:// später entfernen
 
     let x = event.beta; // Neigung nach vorne oder hinten
     let y = event.gamma; // Neigung nach links oder rechts
@@ -52,11 +56,23 @@ function handleOrientation(event) {
     x = Math.min(45, Math.max(-45, x));
     y = Math.min(45, Math.max(-45, y));
 
-    // Umrechnung der Neigung in eine Transformation
-    let transformValue = `translate(${y}px, ${x}px)`;
-    console.log(transformValue); //Später entfernen
+    // Füge den Trägheitseffekt hinzu
+    inertiaX += x / 10;
+    inertiaY += y / 10;
+}
+
+function updateBallPosition() {
+    // Füge Reibung hinzu (vereinfachte lineare Reibung)
+    inertiaX *= 0.99;
+    inertiaY *= 0.99;
+
+    // Bewege den Ball basierend auf Trägheit
+    let transformValue = `translate(${inertiaX}px, ${inertiaY}px)`;
     ball.style.transform = transformValue;
 
+    console.log(transformValue); TODO: //Später entfernen, nur zum Testen
+
+    //Checke ob der Ball bereits im Portal ist
     checkCollision();
 }
 
