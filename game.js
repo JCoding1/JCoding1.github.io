@@ -29,7 +29,7 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     startTime = new Date().getTime();
-    gameInterval = setInterval(updateGame, 16); //60fps
+    gameInterval = setInterval(updateGame, 1000); //60fps
     window.addEventListener('deviceorientation', handleOrientation, true);
 
 }
@@ -67,7 +67,7 @@ function updateBallPosition() {
     inertiaY *= 0.99;
 
     // Bewege den Ball basierend auf Trägheit
-    let transformValue = `translate(${inertiaX}px, ${inertiaY}px)`;
+    let transformValue = `translate(${inertiaY}px, ${inertiaX}px)`;
     ball.style.transform = transformValue;
 
     console.log(transformValue); TODO: //Später entfernen, nur zum Testen
