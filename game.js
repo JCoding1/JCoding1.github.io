@@ -39,7 +39,7 @@ function updateTimer() {
 }
 
 function handleOrientation(event) {
-    console.log(event); TODO:// später entfernen
+    console.log(event); // später entfernen
 
     let x = event.beta; // Neigung nach vorne oder hinten
     let y = event.gamma; // Neigung nach links oder rechts
@@ -48,13 +48,12 @@ function handleOrientation(event) {
     x = Math.min(45, Math.max(-45, x));
     y = Math.min(45, Math.max(-45, y));
 
+    // Umrechnung der Neigung in eine Transformation
     let transformValue = `translate(${y}px, ${x}px)`;
+    console.log(transformValue); //Später entfernen
     ball.style.transform = transformValue;
 
-    console.log(transformValue); TODO:  //Später entfernen, nur zum Testen
-
-    
-    checkCollision(); //Checke ob der Ball bereits im Portal ist
+    checkCollision();
 }
 
 
