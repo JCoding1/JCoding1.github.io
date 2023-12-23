@@ -52,8 +52,13 @@ function handleOrientation(event) {
     let transformValue = `translate(${y}px, ${x}px)`;
     console.log(transformValue); //Später entfernen
     ball.style.transform = transformValue;
+    
 
     checkCollision();
+    
+    //rekursiver Aufruf der Methode selber
+    window.addEventListener('deviceOrientation', handleOrientation);
+
 }
 
 
