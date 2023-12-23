@@ -29,12 +29,14 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     startTime = new Date().getTime();
-    window.addEventListener('deviceorientation', handleOrientation, true);
     gameInterval = setInterval(updateGame, 16); //60fps
+    // window.addEventListener('deviceorientation', handleOrientation, true);
+    
 }
 
 function updateGame() {
     updateTimer();
+    window.addEventListener('deviceorientation', handleOrientation, true);
     updateBallPosition();
 
 }
