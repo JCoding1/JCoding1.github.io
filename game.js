@@ -29,14 +29,14 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     startTime = new Date().getTime();
-    gameInterval = setInterval(updateGame, 16); //60fps
-    // window.addEventListener('deviceorientation', handleOrientation, true);
+    gameInterval = setInterval(updateTimer, 1000); //60fps
+    window.addEventListener('deviceorientation', handleOrientation, true);
     
 }
 
 function updateGame() {
     updateTimer();
-    window.addEventListener('deviceorientation', handleOrientation, true);
+   // window.addEventListener('deviceorientation', handleOrientation, true);
     updateBallPosition();
 
 }
@@ -58,8 +58,13 @@ function handleOrientation(event) {
     y = Math.min(45, Math.max(-45, y));
 
     // Füge den Trägheitseffekt hinzu
-    inertiaX += x / 10;
-    inertiaY += y / 10;
+    //inertiaX += x / 10;
+    //inertiaY += y / 10;
+
+    let transformValue = `translate(${y}px, ${x}px)`;
+    ball.style.transform = transformValue;
+    checkCollision();
+
 }
 
 function updateBallPosition() {
