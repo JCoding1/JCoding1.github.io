@@ -29,9 +29,8 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     startTime = new Date().getTime();
-    gameInterval = setInterval(updateGame, 1000); //60fps
     window.addEventListener('deviceorientation', handleOrientation, true);
-
+    gameInterval = setInterval(updateGame, 16); //60fps
 }
 
 function updateGame() {
