@@ -6,17 +6,6 @@ let startTime;
 let gameInterval;
 
 
-//Displaygröße
-let maxWidth = window.innerWidth;
-let maxHeight = window.innerHeight;
-
-//Definiere die Zufälligen Startwerte: 
-var x = Math.floor((Math.random() * maxWidth) + 10);
-var y = Math.floor((Math.random() * maxHeight) + 10);
-
-ball.style.left = x;
-ball.style.top = y;
-
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
         try {
@@ -52,6 +41,17 @@ function updateTimer() {
 
 function handleOrientation(event) {
 
+    //Displaygröße
+    let maxWidth = window.innerWidth;
+    let maxHeight = window.innerHeight;
+
+    //Definiere die Zufälligen Startwerte: 
+    var x = Math.floor((Math.random() * maxWidth) + 10);
+    var y = Math.floor((Math.random() * maxHeight) + 10);
+
+    ball.style.left = x;
+    ball.style.top = y;
+
 
     //Neigungswinkel vom Eventlistener
     let betaDegree = event.beta; // Neigung nach vorne oder hinten
@@ -64,38 +64,35 @@ function handleOrientation(event) {
     betaDegree = Math.min(90, Math.max(-90, betaDegree));
     gammaDegree = Math.min(90, Math.max(-90, gammaDegree));
 
-    //Um Berechnung einfacher zu machen ändern wir das Intervall auf [0;180]
-    betaDegree += 90;
-    gammaDegree += 90;
 
     // Umrechnung der Neigung in eine Transformation
-    //Auf die alte Positin drauf addieren
+
     TODO: //let transformValue = `translate(${gammaDegree}px, ${betaDegree}px)`;
 
-    /*
+
     //Eigener Versuch
     if (betaDegree >= 0) {
         ball.style.top = y + betaDegree;
+        y = y + betaDegree;
     }
     else if (betaDegree < 0) {
         ball.style.top = y - betaDegree;
+        y = y-betaDegree;
     }
 
     if (gammaDegree > 0) {
-        ball.style.left = x + gammaDegree
+        ball.style.left = x + gammaDegree;
+        x = x + gammaDegree;
     }
     else if (gammaDegree < 0) {
         ball.style.left = x - gammaDegree;
+        x = x - gammaDegree;
     }
-    */
-    //Eigener Versuch Ende
+
+
 
 
     TODO: //ball.style.transform = transformValue; //ausgehend von initialer position
-
-
-    ball.style.left = `${(maxHeight * gammaDegree) / 180 - 25}px`; 
-    ball.style.top = `${(maxWidth * betaDegree) / 180 - 25}px`;
 
     checkCollision();
 }
