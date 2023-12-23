@@ -4,6 +4,8 @@ let timer = document.getElementById('timer');
 
 let startTime;
 let gameInterval;
+let x = 0;
+let y = 0;
 
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
@@ -39,26 +41,44 @@ function updateTimer() {
 }
 
 function handleOrientation(event) {
-    console.log(event); // später entfernen
+    //Displaygröße
+    let maxWidth = window.innerWidth;
+    let maxHeight = window.innerHeight;
 
-    let x = event.beta; // Neigung nach vorne oder hinten
-    let y = event.gamma; // Neigung nach links oder rechts
+    //Definiere die Zufälligen Startwerte: 
+    x = Math.floor((Math.random() * maxWidth) + 10);
+    y = Math.floor((Math.random() * maxHeight) + 10);
+
+    ball.style.left = x;
+    ball.style.top = y;
+
+    //Neigungswinkel vom Eventlistener
+    let betaDegree = event.beta; // Neigung nach vorne oder hinten
+    let gammaDegree = event.gamma; // Neigung nach links oder rechts
 
     // Begrenze den Neigungsbereich auf [-45, 45]
-    x = Math.min(45, Math.max(-45, x));
-    y = Math.min(45, Math.max(-45, y));
+    betaDegree = Math.min(45, Math.max(-45, x));
+    gammaDegree = Math.min(45, Math.max(-45, y));
 
     // Umrechnung der Neigung in eine Transformation
-    let transformValue = `translate(${y}px, ${x}px)`;
-    console.log(transformValue); //Später entfernen
-    ball.style.transform = transformValue;
-    
+    //Auf die alte Positin drauf addieren
+    TODO: //let transformValue = `translate(${gammaDegree}px, ${betaDegree}px)`;
+    if (betaDegree >= 0) {
+        ball.style.top = y + betaDegree;
+    }
+    else if (betaDegree < 0) {
+        ball.style.top = y - betaDegree;
+    }
+
+    if (gammaDegree > 0) {
+        ball.style.left = x + gammaDegree
+    }
+    else if (gammaDegree < 0) {
+        ball.style.left = x - gammaDegree;
+    }
+    TODO: //ball.style.transform = transformValue; //ausgehend von initialer position
 
     checkCollision();
-    
-    //rekursiver Aufruf der Methode selber
-    window.addEventListener('deviceOrientation', handleOrientation);
-
 }
 
 
