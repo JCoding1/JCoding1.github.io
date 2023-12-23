@@ -5,19 +5,19 @@ let timer = document.getElementById('timer');
 let startTime;
 let gameInterval;
 
-async function requestDeviceOrientation(){
+async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
-        try{
+        try {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
             }
         }
-        catch(error){
+        catch (error) {
             console.error(error);
         }
     }
-    else if ('DeviceOrientationEvent' in window){
+    else if ('DeviceOrientationEvent' in window) {
         window.addEventListener('deviceorientation', handleOrientation);
     }
     else {
@@ -28,11 +28,12 @@ async function requestDeviceOrientation(){
 function startGame() {
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
-
-    
+    while(checkCollision!= true){
         window.addEventListener('deviceorientation', handleOrientation, true);
+    }
     
-    
+
+
 }
 
 function updateTimer() {
@@ -42,7 +43,8 @@ function updateTimer() {
 }
 
 function handleOrientation(event) {
-    console.log(event);
+    console.log(event); // später entfernen
+
     let x = event.beta; // Neigung nach vorne oder hinten
     let y = event.gamma; // Neigung nach links oder rechts
 
@@ -52,7 +54,7 @@ function handleOrientation(event) {
 
     // Umrechnung der Neigung in eine Transformation
     let transformValue = `translate(${y}px, ${x}px)`;
-    console.log(transformValue);
+    console.log(transformValue); //Später entfernen
     ball.style.transform = transformValue;
 
     checkCollision();
