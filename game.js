@@ -5,6 +5,18 @@ let timer = document.getElementById('timer');
 let startTime;
 let gameInterval;
 
+ //Displaygröße
+ let maxWidth = window.innerWidth;
+ let maxHeight = window.innerHeight;
+
+ //Definiere die Zufälligen Startwerte: 
+ var x = Math.floor((Math.random() * maxWidth) + 10);
+ var y = Math.floor((Math.random() * maxHeight) + 10);
+
+ ball.style.left = x;
+ ball.style.top = y;
+
+
 
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
@@ -12,6 +24,7 @@ async function requestDeviceOrientation() {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
+                console.output('Test');
             }
         }
         catch (error) {
@@ -40,18 +53,6 @@ function updateTimer() {
 }
 
 function handleOrientation(event) {
-
-    //Displaygröße
-    let maxWidth = window.innerWidth;
-    let maxHeight = window.innerHeight;
-
-    //Definiere die Zufälligen Startwerte: 
-    var x = Math.floor((Math.random() * maxWidth) + 10);
-    var y = Math.floor((Math.random() * maxHeight) + 10);
-
-    ball.style.left = x;
-    ball.style.top = y;
-
 
     //Neigungswinkel vom Eventlistener
     let betaDegree = event.beta; // Neigung nach vorne oder hinten
