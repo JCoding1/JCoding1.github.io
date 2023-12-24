@@ -95,19 +95,31 @@ function handleOrientation(event) {
 
 
     // Umrechnung der Neigung in eine Beschleunigung
-    ax = gammaDegree;
-    ay = betaDegree;
+    ax = gammaDegree * 0.1;
+    ay = betaDegree * 0.1;
 }
 
 function checkBoundaries() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    if (x <= gameContainerRect.left || x >= gameContainerRect.right) {
+    if (x < gameContainerRect.left || x > gameContainerRect.right) {
         ax = 0;
         vx = 0;
+        if(x < gameContainerRect.left) {
+            x = gameContainerRect.left + 5;
+        }
+        if(x > gameContainerRect.right) {
+            x = gameContainerRect.right - 5;
+        }
     }
     if (y <= gameContainerRect.top || y >= gameContainerRect.bottom) {
         ay = 0;
         ax = 0;
+        if(y < gameContainerRect.top) {
+            y = gameContainerRect.top + 5;
+        }
+        if(y > gameContainerRect.bottom) {
+            y = gameContainerRect.bottom - 5;
+        }
     }
 }
 
