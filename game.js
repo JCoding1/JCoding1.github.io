@@ -56,6 +56,12 @@ function updateTimer() {
     let currentTime = new Date().getTime();
     let elapsedTime = Math.floor((currentTime - startTime) / 1000);
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
+    if (elapsedTime >= 30) {
+        clearInterval(gameInterval);
+        clearInterval(animInterval);
+        window.removeEventListener('deviceorientation', handleOrientation);
+        alert('Verloren! Du warst zu langsam:(');
+    }
 }
 
 function updateAnimation() {
@@ -98,24 +104,26 @@ function handleOrientation(event) {
 
 function checkBoundaries() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    if (x < gameContainerRect.left || (x + 25) > gameContainerRect.right) {
+    if (x < gameContainerRect.left || (x + 50) > gameContainerRect.right) {
         ax = 0;
         vx = 0;
         if(x < gameContainerRect.left) {
             x = gameContainerRect.left + 5;
         }
-        if(x > gameContainerRect.right) {
-            x = gameContainerRect.right - 5;
+        if((x+50) > gameContainerRect.right) {
+            //-5 um von der Border wegzukommen und -50 um den Ball zu kompensieren
+            x = gameContainerRect.right - 55;  
         }
     }
-    if (y <= gameContainerRect.top || (y + 25) >= gameContainerRect.bottom) {
+    if (y <= gameContainerRect.top || (y + 50) >= gameContainerRect.bottom) {
         ay = 0;
         vy = 0;
         if(y < gameContainerRect.top) {
             y = gameContainerRect.top + 5;
         }
-        if(y > gameContainerRect.bottom) {
-            y = gameContainerRect.bottom - 5;
+        if((y+50) > gameContainerRect.bottom) {
+            //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
+            y = gameContainerRect.bottom - 55;
         }
     }
 }
@@ -133,6 +141,7 @@ function checkCollision() {
         ballRect.bottom <= holeRect.bottom
     ) {
         clearInterval(gameInterval);
+        clearInterval(animInterval);
         window.removeEventListener('deviceorientation', handleOrientation);
         alert('Gewonnen! Zeit: ' + timer.textContent);
     }
