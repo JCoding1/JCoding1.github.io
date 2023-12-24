@@ -1,22 +1,27 @@
 let ball = document.getElementById('ball');
 let hole = document.getElementById('hole');
 let timer = document.getElementById('timer');
+let gameContainer = document.getElementById('game-container');
 
 let startTime;
 let gameInterval;
 
- //Displaygröße
- let maxWidth = window.innerWidth;
- let maxHeight = window.innerHeight;
+//Displaygröße
+let maxWidth = window.innerWidth;
+let maxHeight = window.innerHeight;
 
- //Definiere die Zufälligen Startwerte: 
- var x = Math.floor((Math.random() * maxWidth) + 10);
- var y = Math.floor((Math.random() * maxHeight) + 10);
+//Definiere die Zufälligen Startwerte: 
+var x = Math.floor((Math.random() * maxWidth) + 10);
+var y = Math.floor((Math.random() * maxHeight) + 10);
 
- ball.style.left = x;
- ball.style.top = y;
+ball.style.left = `${x}px`;
+ball.style.top = `${y}px`;
 
-
+// Werte für Beschleunigung und Geschwindigkeit
+var ax = 0;
+var ay = 0;
+var vx = 0;
+var vy = 0;
 
 async function requestDeviceOrientation() {
     if (typeof DeviceOrientationEvent != 'undefined' && typeof DeviceOrientationEvent.requestPermission() === 'function') {
@@ -42,6 +47,7 @@ async function requestDeviceOrientation() {
 function startGame() {
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
+    animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
 
 }
@@ -52,50 +58,57 @@ function updateTimer() {
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
 }
 
+function updateAnimation() {
+    checkBoundaries();
+
+    //Geschwindigkeit = Zeit * Beschleunigung               v = a * t + v0
+    vx = vx + ax;
+    vy = vy + ay;
+
+    //Streche/ Position = Zeit * Geschwindigkeit            s = v * t + s0
+    x = x + vx;
+    y = y + vy;
+
+    //Zuweisung der Position
+    ball.style.left = `${x}px`;
+    ball.style.top = `${y}px`;
+
+    checkCollision();
+
+    // TODO: let transformValue = `translate(${gammaDegree}px, ${betaDegree}px)`;
+    // TODO: ball.style.transform = transformValue; //ausgehend von initialer position
+}
+
+
 function handleOrientation(event) {
 
     //Neigungswinkel vom Eventlistener
     let betaDegree = event.beta; // Neigung nach vorne oder hinten
     let gammaDegree = event.gamma; // Neigung nach links oder rechts
 
-    output.textContent = `beta: ${betaDegree}\n`;
-    output.textContent += `gamma: ${betaDegree}\n`;
+    /*output.textContent = `beta: ${betaDegree}\n`;
+    output.textContent += `gamma: ${betaDegree}\n`;  */
 
     // Begrenze den Neigungsbereich auf [-90, 90]
     betaDegree = Math.min(90, Math.max(-90, betaDegree));
     gammaDegree = Math.min(90, Math.max(-90, gammaDegree));
 
 
-    // Umrechnung der Neigung in eine Transformation
+    // Umrechnung der Neigung in eine Beschleunigung
+    ax = gammaDegree;
+    ay = betaDegree;
+}
 
-    TODO: //let transformValue = `translate(${gammaDegree}px, ${betaDegree}px)`;
-
-
-    //Eigener Versuch
-    if (betaDegree >= 0) {
-        ball.style.top = y + betaDegree;
-        y = y + betaDegree;
+function checkBoundaries() {
+    let gameContainerRect = gameContainer.getBoundingClientRect();
+    if (x <= gameContainerRect.left || x >= gameContainerRect.right) {
+        ax = 0;
+        vx = 0;
     }
-    else if (betaDegree < 0) {
-        ball.style.top = y - betaDegree;
-        y = y-betaDegree;
+    if (y <= gameContainerRect.top || y >= gameContainerRect.bottom) {
+        ay = 0;
+        ax = 0;
     }
-
-    if (gammaDegree > 0) {
-        ball.style.left = x + gammaDegree;
-        x = x + gammaDegree;
-    }
-    else if (gammaDegree < 0) {
-        ball.style.left = x - gammaDegree;
-        x = x - gammaDegree;
-    }
-
-
-
-
-    TODO: //ball.style.transform = transformValue; //ausgehend von initialer position
-
-    checkCollision();
 }
 
 
