@@ -74,9 +74,6 @@ function updateAnimation() {
     ball.style.top = `${y}px`;
 
     checkCollision();
-
-    // TODO: let transformValue = `translate(${gammaDegree}px, ${betaDegree}px)`;
-    // TODO: ball.style.transform = transformValue; //ausgehend von initialer position
 }
 
 
@@ -101,7 +98,7 @@ function handleOrientation(event) {
 
 function checkBoundaries() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    if (x < gameContainerRect.left || x > gameContainerRect.right) {
+    if (x < gameContainerRect.left || (x + 25) > gameContainerRect.right) {
         ax = 0;
         vx = 0;
         if(x < gameContainerRect.left) {
@@ -111,7 +108,7 @@ function checkBoundaries() {
             x = gameContainerRect.right - 5;
         }
     }
-    if (y <= gameContainerRect.top || y >= gameContainerRect.bottom) {
+    if (y <= gameContainerRect.top || (y + 25) >= gameContainerRect.bottom) {
         ay = 0;
         vy = 0;
         if(y < gameContainerRect.top) {

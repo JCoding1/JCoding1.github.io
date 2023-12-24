@@ -41,5 +41,8 @@ body {
   }
 
   button{
-    color: #e74c3c;
+    color: white;
+    background-color: #e74c3c;
+    width: 80;
+    height: 30px;
   }
