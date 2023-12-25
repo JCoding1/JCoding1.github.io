@@ -59,6 +59,7 @@ function updateTimer() {
     let currentTime = new Date().getTime();
     let elapsedTime = Math.floor((currentTime - startTime) / 1000);
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
+   /*
     if (elapsedTime >= 30) {
         clearInterval(gameInterval);
         clearInterval(animInterval);
@@ -66,6 +67,7 @@ function updateTimer() {
         alert('Verloren! Du warst zu langsam:(');
         startGame();
     }
+    */
 }
 
 function updateAnimation() {
