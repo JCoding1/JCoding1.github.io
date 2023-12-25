@@ -5,7 +5,6 @@ let gameContainer = document.getElementById('game-container');
 
 let startTime;
 let gameInterval;
-let animInterval;
 
 //Displaygröße
 let maxWidth = window.innerWidth;
@@ -46,7 +45,8 @@ async function requestDeviceOrientation() {
 }
 
 
-function startGame() {    
+
+function startGame() {
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
@@ -125,7 +125,7 @@ function checkBoundaries() {
         if(y < gameContainerRect.top) {
             y = gameContainerRect.top + 5;
         }
-        if((y + 50) > gameContainerRect.bottom) {
+        if((y+50) > gameContainerRect.bottom) {
             //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
             y = gameContainerRect.bottom - 55;
         }
