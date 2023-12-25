@@ -119,7 +119,7 @@ function checkBoundaries() {
             x = gameContainerRect.right - 55;  
         }
     }
-    if (y < gameContainerRect.top || (y + 50) > gameContainerRect.bottom) {
+    if (y <= gameContainerRect.top || (y + 50) >= gameContainerRect.bottom) {
         ay = 0;
         vy = 0;
         if(y < gameContainerRect.top) {
