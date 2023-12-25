@@ -44,11 +44,13 @@ async function requestDeviceOrientation() {
     }
 }
 
-function startGame() {
+
+function startGame() {    
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
+    
 
 }
 
@@ -61,6 +63,7 @@ function updateTimer() {
         clearInterval(animInterval);
         window.removeEventListener('deviceorientation', handleOrientation);
         alert('Verloren! Du warst zu langsam:(');
+        startGame();
     }
 }
 
