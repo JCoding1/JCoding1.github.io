@@ -124,7 +124,7 @@ function checkBoundaries() {
         if(y < gameContainerRect.top) {
             y = gameContainerRect.top + 5;
         }
-        if((y+50) > gameContainerRect.bottom) {
+        if((y + 50) > gameContainerRect.bottom) {
             //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
             y = gameContainerRect.bottom - 55;
         }
