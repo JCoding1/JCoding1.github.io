@@ -110,18 +110,18 @@ function handleOrientation(event) {
 
 function checkBoundaries() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    if (x < gameContainerRect.left || (x + 50) > gameContainerRect.right) {
+    if (x < gameContainerRect.left || ((x + 50) > gameContainerRect.right)) {
         ax = 0;
         vx = 0;
         if(x < gameContainerRect.left) {
             x = gameContainerRect.left + 5;
         }
-        if((x+50) > gameContainerRect.right) {
+        if(((x+50) > gameContainerRect.right)) {
             //-5 um von der Border wegzukommen und -50 um den Ball zu kompensieren
             x = gameContainerRect.right - 55;  
         }
     }
-    if (y <= gameContainerRect.top || (y + 50) >= gameContainerRect.bottom) {
+    if (y < gameContainerRect.top || ((y + 50) > gameContainerRect.bottom)) {
         ay = 0;
         vy = 0;
         if(y < gameContainerRect.top) {
