@@ -4,14 +4,13 @@ body {
   }
 
   #game-container {
-    width: 100vw;
-    height: 100vh;
-    background-color: #f0f0f0;
+    width: 90vw;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: aqua;
+    background-color: rgb(119, 248, 248);
     border: 5px solid black;
   }
 
@@ -46,4 +45,5 @@ body {
     background-color: #e74c3c;
     width: 80;
     height: 30px;
+    border-radius: 20%;
   }

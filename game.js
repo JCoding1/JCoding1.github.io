@@ -51,7 +51,7 @@ function startGame() {
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
-    
+
 
 }
 
@@ -59,15 +59,15 @@ function updateTimer() {
     let currentTime = new Date().getTime();
     let elapsedTime = Math.floor((currentTime - startTime) / 1000);
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
-   /*
-    if (elapsedTime >= 30) {
-        clearInterval(gameInterval);
-        clearInterval(animInterval);
-        window.removeEventListener('deviceorientation', handleOrientation);
-        alert('Verloren! Du warst zu langsam:(');
-        startGame();
-    }
-    */
+    /*
+     if (elapsedTime >= 30) {
+         clearInterval(gameInterval);
+         clearInterval(animInterval);
+         window.removeEventListener('deviceorientation', handleOrientation);
+         alert('Verloren! Du warst zu langsam:(');
+         startGame();
+     }
+     */
 }
 
 function updateAnimation() {
@@ -110,26 +110,26 @@ function handleOrientation(event) {
 
 function checkBoundaries() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    if (x < gameContainerRect.left || ((x + 50) > gameContainerRect.right)) {
+    if ((x - 5) < gameContainerRect.left || ((x + 55) > gameContainerRect.right)) {
         ax = 0;
         vx = 0;
-        if(x < gameContainerRect.left) {
+        if ((x - 5) < gameContainerRect.left) {
             x = gameContainerRect.left + 5;
         }
-        if(((x+50) > gameContainerRect.right)) {
-            //-5 um von der Border wegzukommen und -50 um den Ball zu kompensieren
-            x = gameContainerRect.right - 55;  
+        if (((x + 55) > gameContainerRect.right)) { // 50 für den ball, 5 für die border mit 5px
+            //-5 um von der Border wegzukommen, -5 für die gesetzte Border und -50 um den Ball zu kompensieren
+            x = gameContainerRect.right - 60;
         }
     }
-    if (y < gameContainerRect.top || ((y + 50) > gameContainerRect.bottom)) {
+    if ((y - 5) < gameContainerRect.top || ((y + 25) > gameContainerRect.bottom)) {
         ay = 0;
         vy = 0;
-        if(y < gameContainerRect.top) {
-            y = gameContainerRect.top + 5;
+        if ((y - 5) < gameContainerRect.top) {
+            y = gameContainerRect.top + 10; // 5 für die border und 5 um es davon wegzusetzen
         }
-        if((y+50) > gameContainerRect.bottom) {
+        if ((y + 55) > gameContainerRect.bottom) {
             //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
-            y = gameContainerRect.bottom - 55;
+            y = gameContainerRect.bottom - 60;
         }
     }
 }
