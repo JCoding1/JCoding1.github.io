@@ -2,6 +2,7 @@ let ball = document.getElementById('ball');
 let hole = document.getElementById('hole');
 let timer = document.getElementById('timer');
 let gameContainer = document.getElementById('game-container');
+let button = document.getElementById('permissionButton');
 
 let startTime;
 let gameInterval;
@@ -109,7 +110,12 @@ function handleOrientation(event) {
 }
 
 function checkBoundaries() {
+    //Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
+     
     let gameContainerRect = gameContainer.getBoundingClientRect();
+    let buttonRect = button.getBoundingClientRect();
+
+
     if ((x - 5) < gameContainerRect.left || ((x + 55) > gameContainerRect.right)) {
         ax = 0;
         vx = 0;
@@ -121,15 +127,16 @@ function checkBoundaries() {
             x = gameContainerRect.right - 60;
         }
     }
-    if ((y - 5) < gameContainerRect.top || ((y + 25) > gameContainerRect.bottom)) {
+    if ((y + 25) < gameContainerRect.top || ((y + 85) > gameContainerRect.bottom)) {
         ay = 0;
         vy = 0;
-        if ((y - 5) < gameContainerRect.top) {
+        if ((y + 25) < gameContainerRect.top) { // 30 für button oben -5 für border = 25
             y = gameContainerRect.top + 10; // 5 für die border und 5 um es davon wegzusetzen
         }
-        if ((y + 55) > gameContainerRect.bottom) { // 5 für die border und 25 für den ball
-            //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
-            y = gameContainerRect.bottom - 30;
+        if ((y + 85) > gameContainerRect.bottom) { /* 5 für die border und 50 für den ball und 30 für
+                                                  den button oben der kompensiert werden muss*/
+
+            y = gameContainerRect.bottom - 55; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
         }
     }
 }
