@@ -136,7 +136,7 @@ function checkBoundaries() {
         if ((y + 85) > gameContainerRect.bottom) { /* 5 für die border und 50 für den ball und 30 für
                                                   den button oben der kompensiert werden muss*/
 
-            y = gameContainerRect.bottom - 55; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
+            y = gameContainerRect.bottom - 25; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
         }
     }
 }
