@@ -1,8 +1,14 @@
+//Get elements by ID
 let ball = document.getElementById('ball');
 let hole = document.getElementById('hole');
 let timer = document.getElementById('timer');
 let gameContainer = document.getElementById('game-container');
 let button = document.getElementById('permissionButton');
+
+//Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
+let gameContainerRect = gameContainer.getBoundingClientRect();
+let buttonRect = button.getBoundingClientRect();
+
 
 let startTime;
 let gameInterval;
@@ -110,11 +116,7 @@ function handleOrientation(event) {
 }
 
 function checkBoundaries() {
-    //Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
-     
-    let gameContainerRect = gameContainer.getBoundingClientRect();
-    let buttonRect = button.getBoundingClientRect();
-
+    
 
     if ((x - 5) < gameContainerRect.left || ((x + 55) > gameContainerRect.right)) {
         ax = 0;
