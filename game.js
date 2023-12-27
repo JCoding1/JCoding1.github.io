@@ -5,10 +5,6 @@ let timer = document.getElementById('timer');
 let gameContainer = document.getElementById('game-container');
 let button = document.getElementById('permissionButton');
 
-//Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
-let gameContainerRect = gameContainer.getBoundingClientRect();
-let buttonRect = button.getBoundingClientRect();
-
 
 let startTime;
 let gameInterval;
@@ -78,8 +74,6 @@ function updateTimer() {
 }
 
 function updateAnimation() {
-    checkBoundaries();
-
     //Geschwindigkeit = Zeit * Beschleunigung               v = a * t + v0
     vx = vx + ax;
     vy = vy + ay;
@@ -87,6 +81,8 @@ function updateAnimation() {
     //Streche/ Position = Zeit * Geschwindigkeit            s = v * t + s0
     x = x + vx;
     y = y + vy;
+
+    checkBoundaries();
 
     //Zuweisung der Position
     ball.style.left = `${x}px`;
@@ -116,29 +112,32 @@ function handleOrientation(event) {
 }
 
 function checkBoundaries() {
-    
 
-    if ((x - 5) < gameContainerRect.left || ((x + 55) > gameContainerRect.right)) {
+    //Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
+    let gameContainerRect = gameContainer.getBoundingClientRect();
+
+
+    if ((x - 5) < 0 || ((x + 55) > gameContainerRect.width)) { //links und rechts
         ax = 0;
         vx = 0;
-        if ((x - 5) < gameContainerRect.left) {
-            x = gameContainerRect.left + 10;
+        if ((x - 5) < 0) {
+            x = 0 + 10;
         }
-        if (((x + 55) > gameContainerRect.right)) { // 50 für den ball, 5 für die border mit 5px
+        if (((x + 55) > gameContainerRect.width)) { // 50 für den ball, 5 für die border mit 5px
             //-5 um von der Border wegzukommen, -5 für die gesetzte Border und -50 um den Ball zu kompensieren
-            x = gameContainerRect.right - 60;
+            x = gameContainerRect.width - 60;
         }
     }
-    if ((y - 5) < gameContainerRect.top || ((y + 55) > gameContainerRect.bottom)) {
+    if ((y - 5) < 0 || ((y + 55) > gameContainerRect.height)) {
         ay = 0;
         vy = 0;
-        if ((y - 5) < gameContainerRect.top) { // 30 für button oben -5 für border = 25
-            y = gameContainerRect.top + 10; // 5 für die border und 5 um es davon wegzusetzen
+        if ((y - 5) < 0) { // 30 für button oben -5 für border = 25
+            y = 0 + 10; // 5 für die border und 5 um es davon wegzusetzen
         }
-        if ((y + 55) > gameContainerRect.bottom) { /* 5 für die border und 50 für den ball und 30 für
+        if ((y + 55) > gameContainerRect.height) { /* 5 für die border und 50 für den ball und 30 für
                                                   den button oben der kompensiert werden muss*/
 
-            y = gameContainerRect.bottom - 60; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
+            y = gameContainerRect.height - 60; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
         }
     }
 }
