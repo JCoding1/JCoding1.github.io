@@ -5,13 +5,15 @@ body {
 
   #game-container {
     width: 90vw;
-    height: 90vh;
+    height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     background-color: rgb(119, 248, 248);
     border: 5px solid black;
+    margin: auto;
+    margin-top: 50px;
   }
 
   #ball {

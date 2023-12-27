@@ -5,7 +5,6 @@ let timer = document.getElementById('timer');
 let gameContainer = document.getElementById('game-container');
 let button = document.getElementById('permissionButton');
 
-
 let startTime;
 let gameInterval;
 
@@ -13,12 +12,16 @@ let gameInterval;
 let maxWidth = window.innerWidth;
 let maxHeight = window.innerHeight;
 
-//Definiere die Zufälligen Startwerte: 
+//Definiere die Zufälligen Startwerte für den Ball: 
 var x = Math.floor((Math.random() * maxWidth) + 10);
 var y = Math.floor((Math.random() * maxHeight) + 10);
 
 ball.style.left = `${x}px`;
 ball.style.top = `${y}px`;
+
+//Definiere Zufällige Startwerte für das Loch
+var xLoch = Math.floor((Math.random() * maxWidth) + 10);
+var yLoch = Math.floor((Math.random() * maxWidth) + 10);
 
 // Werte für Beschleunigung und Geschwindigkeit
 var ax = 0;
@@ -47,15 +50,11 @@ async function requestDeviceOrientation() {
     }
 }
 
-
-
 function startGame() {
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
-
-
 }
 
 function updateTimer() {
@@ -78,66 +77,61 @@ function updateAnimation() {
     vx = vx + ax;
     vy = vy + ay;
 
-    //Streche/ Position = Zeit * Geschwindigkeit            s = v * t + s0
+    //Strecke/ Position = Zeit * Geschwindigkeit            s = v * t + s0
     x = x + vx;
     y = y + vy;
 
+    //Bevor die Position gesetzt wird, checke ob sich der Ball außerhalb der Grenzen befindet
     checkBoundaries();
 
     //Zuweisung der Position
     ball.style.left = `${x}px`;
     ball.style.top = `${y}px`;
 
+    //Checke ob der Ball an seiner neuen Position im Loch ist
     checkCollision();
 }
 
-
 function handleOrientation(event) {
-
-    //Neigungswinkel vom Eventlistener
-    let betaDegree = event.beta; // Neigung nach vorne oder hinten
+    //Neigungswinkel vom Eventlistener abspeichern
+    let betaDegree = event.beta; // Neigung nach vorne oder hinten des Handys
     let gammaDegree = event.gamma; // Neigung nach links oder rechts
 
-    /*output.textContent = `beta: ${betaDegree}\n`;
-    output.textContent += `gamma: ${betaDegree}\n`;  */
-
-    // Begrenze den Neigungsbereich auf [-90, 90]
+    // Begrenze den Neigungsbereich auf [-90, 90] Grad
     betaDegree = Math.min(90, Math.max(-90, betaDegree));
     gammaDegree = Math.min(90, Math.max(-90, gammaDegree));
 
-
     // Umrechnung der Neigung in eine Beschleunigung
-    ax = gammaDegree * 0.1;
-    ay = betaDegree * 0.1;
+    ax = gammaDegree * 0.05;
+    ay = betaDegree * 0.05;
 }
 
 function checkBoundaries() {
 
-    //Get gameContainerRect and buttonRect um die Position ihrer Borders zu bestimmen
+    //Get gameContainerRect um die Position der Borders zu bestimmen
     let gameContainerRect = gameContainer.getBoundingClientRect();
 
 
-    if (x < 0 || ((x + 55) > gameContainerRect.width)) { //links und rechts
-        //ax = 0;
+    //Prüfe ob der Ball sich außerhalb der Grenzen befindet 
+    if (x < 0 || ((x + 55) > gameContainerRect.width)) { //Linke und Rechte Grenze 
         vx = -vx * 0.6;
         if (x < 0) {
-            x = 0 + 5;
+            x = 5;
         }
-        if (((x + 55) > gameContainerRect.width)) { // 50 für den ball, 5 für die border mit 5px
-            //-5 um von der Border wegzukommen, -5 für die gesetzte Border und -50 um den Ball zu kompensieren
-            x = gameContainerRect.width - 60;
+        if (((x + 55) > gameContainerRect.width)) { // 50 für den ball, 5 für die border
+
+            x = gameContainerRect.width - 60; /*-5 um von der Border wegzukommen, -5 für die
+                                              gesetzte Border und -50 um den Ball zu kompensieren*/
         }
     }
-    if (y < 0 || ((y + 55) > gameContainerRect.height)) {
-        //ay = 0;
-        vy = -vy * 0.6;
-        if (y < 0) { // 30 für button oben -5 für border = 25
-            y = 0 + 5; // 5 für die border und 5 um es davon wegzusetzen
-        }
-        if ((y + 55) > gameContainerRect.height) { /* 5 für die border und 50 für den ball und 30 für
-                                                  den button oben der kompensiert werden muss*/
 
-            y = gameContainerRect.height - 60; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
+    if (y < 0 || ((y + 55) > gameContainerRect.height)) { //Obere und Untere Grenze
+        vy = -vy * 0.6;
+        if (y < 0) {
+            y = 5;
+        }
+        if ((y + 55) > gameContainerRect.height) {
+            y = gameContainerRect.height - 60;
         }
     }
 }
