@@ -122,23 +122,23 @@ function checkBoundaries() {
         ax = 0;
         vx = 0;
         if ((x - 5) < gameContainerRect.left) {
-            x = gameContainerRect.left + 5;
+            x = gameContainerRect.left + 10;
         }
         if (((x + 55) > gameContainerRect.right)) { // 50 für den ball, 5 für die border mit 5px
             //-5 um von der Border wegzukommen, -5 für die gesetzte Border und -50 um den Ball zu kompensieren
             x = gameContainerRect.right - 60;
         }
     }
-    if ((y + 25) < gameContainerRect.top || ((y + 85) > gameContainerRect.bottom)) {
+    if ((y - 5) < gameContainerRect.top || ((y + 55) > gameContainerRect.bottom)) {
         ay = 0;
         vy = 0;
-        if ((y + 25) < gameContainerRect.top) { // 30 für button oben -5 für border = 25
+        if ((y - 5) < gameContainerRect.top) { // 30 für button oben -5 für border = 25
             y = gameContainerRect.top + 10; // 5 für die border und 5 um es davon wegzusetzen
         }
-        if ((y + 85) > gameContainerRect.bottom) { /* 5 für die border und 50 für den ball und 30 für
+        if ((y + 55) > gameContainerRect.bottom) { /* 5 für die border und 50 für den ball und 30 für
                                                   den button oben der kompensiert werden muss*/
 
-            y = gameContainerRect.bottom - 25; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
+            y = gameContainerRect.bottom - 60; //-5 um von border wegzukommen und -50 um den Ball zu kompensieren
         }
     }
 }
