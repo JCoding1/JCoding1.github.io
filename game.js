@@ -19,10 +19,6 @@ var y = Math.floor((Math.random() * maxHeight) + 10);
 ball.style.left = `${x}px`;
 ball.style.top = `${y}px`;
 
-//Definiere Zufällige Startwerte für das Loch
-var xLoch = Math.floor((Math.random() * maxWidth) + 10);
-var yLoch = Math.floor((Math.random() * maxWidth) + 10);
-
 // Werte für Beschleunigung und Geschwindigkeit
 var ax = 0;
 var ay = 0;
@@ -35,7 +31,7 @@ async function requestDeviceOrientation() {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
-                console.output('Test');
+                //removeFadeOut();
             }
         }
         catch (error) {
@@ -51,6 +47,7 @@ async function requestDeviceOrientation() {
 }
 
 function startGame() {
+    setHole();
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
@@ -62,7 +59,7 @@ function updateTimer() {
     let elapsedTime = Math.floor((currentTime - startTime) / 1000);
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
     /*
-     if (elapsedTime >= 30) {
+     if (elapsedTime >= 60) {
          clearInterval(gameInterval);
          clearInterval(animInterval);
          window.removeEventListener('deviceorientation', handleOrientation);
@@ -70,6 +67,19 @@ function updateTimer() {
          startGame();
      }
      */
+}
+
+function setHole() {
+    let gameContainerRect = gameContainer.getBoundingClientRect();
+    let maxWidth = gameContainerRect.width;
+    let maxHeight = gameContainerRect.height;
+    //Definiere Zufällige Startwerte für das Loch
+    var xLoch = Math.floor((Math.random() * maxWidth) + 10);
+    var yLoch = Math.floor((Math.random() * maxWidth) + 10);
+
+    //Setze die Position des Lochs
+    hole.style.left = `${xLoch}px`;
+    hole.style.top = `${yLoch}px`;
 }
 
 function updateAnimation() {
@@ -154,5 +164,15 @@ function checkCollision() {
         alert('Gewonnen! Zeit: ' + timer.textContent);
     }
 }
+
+/*function removeFadeOut(element, speed) {
+    var seconds = speed / 1000;
+    element.style.transition = "opacity " + seconds + "s ease";
+    element.style.opacity = 0;
+    setTimeout(function () {
+        element.parentNode.removeChild(el);
+    }, speed);
+
+} */
 
 startGame();
