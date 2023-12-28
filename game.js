@@ -49,7 +49,7 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     setHole();
-    fadeOutButton();
+    fadeOutEffect();
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
@@ -77,8 +77,8 @@ function setHole() {
     let maxWidth = gameContainerRect.width;
     let maxHeight = gameContainerRect.height;
     //Definiere Zufällige Startwerte für das Loch
-    var xLoch = Math.floor((Math.random() * maxWidth) + 10);
-    var yLoch = Math.floor((Math.random() * maxWidth) + 10);
+    var xLoch = Math.floor((Math.random() * maxWidth));
+    var yLoch = Math.floor((Math.random() * maxWidth));
 
     //Setze die Position des Lochs
     hole.style.left = `${xLoch}px`;
@@ -168,7 +168,7 @@ function checkCollision() {
     }
 }
 
-function fadeOutEffect() {
+async function fadeOutEffect() {
     var fadeTarget = document.getElementById("permissionButton");
     var fadeEffect = setInterval(function () {
         if (!fadeTarget.style.opacity) {
