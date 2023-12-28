@@ -13,42 +13,38 @@
 </head>
 
 <body>
-    <header class="containers">
-        <div class="gameNameContainer">
-            <h1 class="gameName">
-                Game of Balance
-            </h1>
-        </div>
-
-
+    <header>
+        <h1 class="gameName"> Game of Balance </h1>
     </header>
 
-    <div class="navigation">
-        <nav>
-            <ul>
-                <li><a href="#">Menu</a>
-                    <ul>
-                        <li><a href="">Startseite</a></li>
-                        <li><a href="">Über uns</a></li>
-                        <li><a href="">Spielen</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+
+    <nav id="navigation">
+        <ul>
+            <li><a href="#">Menu</a>
+                <ul>
+                    <li><a href="spielregeln.html">Spielregeln</a></li>
+                    <li><a href="ueberUns.html">Über uns</a></li>
+                    <li><a href="game.html">Spielen</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+
 
     <main>
+        <div id="trennlinie"></div>
         <div class="containers" id="text">
-            <h1>
+            <h1 id="heading">
                 Erobere den Balance-Thron: Game of Balance!
             </h1>
 
-            <div class="containers" id="descriptions">
+            <div class="containers" id="description">
                 <p>
                     Tauche ein ins fesselnde Abenteuer und stelle dein Geschick auf die Probe! Deine Mission ist es,
                     durch präzises Neigen deines Handys, die Kugel sicher in das mysteriöse Loch zu navigieren.
                 </p>
-                <p>
+                <p id=question>
                     Bist du bereit?
                 </p>
             </div>
@@ -56,6 +52,7 @@
         <button class="startButton">
             <a href="game.html">Starte das Abenteuer ></a>
         </button>
+        <img id="marble" src="marble.png">
     </main>
 
 </body>

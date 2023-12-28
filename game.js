@@ -114,8 +114,8 @@ function handleOrientation(event) {
     gammaDegree = Math.min(90, Math.max(-90, gammaDegree));
 
     // Umrechnung der Neigung in eine Beschleunigung
-    ax = gammaDegree * 0.01;
-    ay = betaDegree * 0.01;
+    ax = gammaDegree * 0.04;
+    ay = betaDegree * 0.04;
 }
 
 function checkBoundaries() {
