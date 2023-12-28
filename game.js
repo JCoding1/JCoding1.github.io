@@ -31,6 +31,7 @@ async function requestDeviceOrientation() {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
+                button.style.display = none;
                 //removeFadeOut();
             }
         }
