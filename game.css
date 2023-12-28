@@ -13,7 +13,7 @@ body {
 
 #game-container {
   width: 90vw;
-  height: 80vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;

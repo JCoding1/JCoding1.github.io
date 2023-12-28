@@ -164,7 +164,9 @@ function checkCollision() {
         clearInterval(animInterval);
         window.removeEventListener('deviceorientation', handleOrientation);
         alert('Gewonnen!' + timer.textContent);
+        startGame();
     }
+    
 }
 
 async function fadeOutEffect() {
@@ -178,7 +180,9 @@ async function fadeOutEffect() {
         } else {
             clearInterval(fadeEffect);
         }
-    }, 200);
+    }, 50);
+    await new Promise(resolve => setTimeout(resolve, 800));
+    fadeTarget.remove();
 }
 
 
