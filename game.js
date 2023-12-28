@@ -31,8 +31,7 @@ async function requestDeviceOrientation() {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
-                button.style.display = none;
-
+                return true;
             }
         }
         catch (error) {
@@ -48,12 +47,15 @@ async function requestDeviceOrientation() {
 }
 
 function startGame() {
-    setHole();
-    startTime = new Date().getTime();
-    gameInterval = setInterval(updateTimer, 1000);
-    animInterval = setInterval(updateAnimation, 50);
-    window.addEventListener('deviceorientation', handleOrientation, true);
-    button.addEventListener('click', fadeOutEffect);
+    setHolePosition();
+    if (requestDeviceOrientation == true) {
+        startTime = new Date().getTime();
+        gameInterval = setInterval(updateTimer, 1000);
+        animInterval = setInterval(updateAnimation, 50);
+        window.addEventListener('deviceorientation', handleOrientation, true);
+        button.addEventListener('click', fadeOutEffect);
+    }
+
 }
 
 function updateTimer() {
@@ -71,13 +73,15 @@ function updateTimer() {
      */
 }
 
-function setHole() {
+function setHolePosition() {
     let gameContainerRect = gameContainer.getBoundingClientRect();
-    let maxWidth = gameContainerRect.width;
-    let maxHeight = gameContainerRect.height;
+    let maxWidthHole = gameContainerRect.width - 55;
+    let maxHeightHole = gameContainerRect.height - 55;
+    console.log(maxHeightHole);
+    console.log(maxWidthHole);
     //Definiere Zufällige Startwerte für das Loch
-    var xLoch = Math.floor((Math.random() * maxWidth));
-    var yLoch = Math.floor((Math.random() * maxWidth));
+    var xLoch = Math.floor((Math.random() * maxWidthHole));
+    var yLoch = Math.floor((Math.random() * maxHeightHole));
 
     //Setze die Position des Lochs
     hole.style.left = `${xLoch}px`;
@@ -114,8 +118,8 @@ function handleOrientation(event) {
     gammaDegree = Math.min(90, Math.max(-90, gammaDegree));
 
     // Umrechnung der Neigung in eine Beschleunigung
-    ax = gammaDegree * 0.05;
-    ay = betaDegree * 0.05;
+    ax = gammaDegree * 0.01;
+    ay = betaDegree * 0.01;
 }
 
 function checkBoundaries() {
@@ -166,7 +170,6 @@ function checkCollision() {
         alert('Gewonnen! ' + timer.textContent);
         startGame();
     }
-    
 }
 
 async function fadeOutEffect() {
@@ -184,7 +187,5 @@ async function fadeOutEffect() {
     await new Promise(resolve => setTimeout(resolve, 800));
     fadeTarget.remove();
 }
-
-
 
 startGame();
