@@ -31,7 +31,6 @@ async function requestDeviceOrientation() {
             const permissionState = await DeviceOrientationEvent.requestPermission();
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
-                return true;
             }
         }
         catch (error) {
@@ -48,14 +47,11 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     setHolePosition();
-    if (requestDeviceOrientation == true) {
-        startTime = new Date().getTime();
-        gameInterval = setInterval(updateTimer, 1000);
-        animInterval = setInterval(updateAnimation, 50);
-        window.addEventListener('deviceorientation', handleOrientation, true);
-        button.addEventListener('click', fadeOutEffect);
-    }
-
+    startTime = new Date().getTime();
+    gameInterval = setInterval(updateTimer, 1000);
+    animInterval = setInterval(updateAnimation, 50);
+    window.addEventListener('deviceorientation', handleOrientation, true);
+    button.addEventListener('click', fadeOutEffect);
 }
 
 function updateTimer() {
