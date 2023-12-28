@@ -49,12 +49,11 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     setHole();
-    fadeOutEffect();
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
-    document.getElementById("permissionButton").addEventListener('click', fadeOutEffect);
+    button.addEventListener('click', fadeOutEffect);
 }
 
 function updateTimer() {
