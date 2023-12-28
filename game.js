@@ -163,7 +163,7 @@ function checkCollision() {
         clearInterval(gameInterval);
         clearInterval(animInterval);
         window.removeEventListener('deviceorientation', handleOrientation);
-        alert('Gewonnen!' + timer.textContent);
+        alert('Gewonnen! ' + timer.textContent);
         startGame();
     }
     
