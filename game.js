@@ -32,7 +32,7 @@ async function requestDeviceOrientation() {
             if (permissionState == 'granted') {
                 window.addEventListener('deviceorientation', handleOrientation);
                 button.style.display = none;
-                //removeFadeOut();
+
             }
         }
         catch (error) {
@@ -49,10 +49,12 @@ async function requestDeviceOrientation() {
 
 function startGame() {
     setHole();
+    fadeOutButton();
     startTime = new Date().getTime();
     gameInterval = setInterval(updateTimer, 1000);
     animInterval = setInterval(updateAnimation, 50);
     window.addEventListener('deviceorientation', handleOrientation, true);
+    document.getElementById("permissionButton").addEventListener('click', fadeOutEffect);
 }
 
 function updateTimer() {
@@ -162,18 +164,24 @@ function checkCollision() {
         clearInterval(gameInterval);
         clearInterval(animInterval);
         window.removeEventListener('deviceorientation', handleOrientation);
-        alert('Gewonnen! Zeit: ' + timer.textContent);
+        alert('Gewonnen!' + timer.textContent);
     }
 }
 
-/*function removeFadeOut(element, speed) {
-    var seconds = speed / 1000;
-    element.style.transition = "opacity " + seconds + "s ease";
-    element.style.opacity = 0;
-    setTimeout(function () {
-        element.parentNode.removeChild(el);
-    }, speed);
+function fadeOutEffect() {
+    var fadeTarget = document.getElementById("permissionButton");
+    var fadeEffect = setInterval(function () {
+        if (!fadeTarget.style.opacity) {
+            fadeTarget.style.opacity = 1;
+        }
+        if (fadeTarget.style.opacity > 0) {
+            fadeTarget.style.opacity -= 0.1;
+        } else {
+            clearInterval(fadeEffect);
+        }
+    }, 200);
+}
 
-} */
+
 
 startGame();
