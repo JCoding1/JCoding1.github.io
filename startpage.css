@@ -99,7 +99,7 @@ h1 {
         color: white;
         border-radius: 0.5rem;
         grid-area: 1/2/2/3;
-        margin-left: 25vw;
+        margin-left: 27vw;
         margin-top: 8vw;
     }
 
@@ -111,7 +111,7 @@ h1 {
     .bar {
         width: 25px;
         height: 3px;
-        background-color: white;
+        background-color: rgb(133, 29, 29);
         margin: 4px 0;
         transition: 0.4s;
     }
