@@ -3,9 +3,7 @@
     font-family: Arial, Verdana, sans-serif;
     text-align: center;
     font-size: 1rem;
-    ;
     padding: 0;
-    margin: 5;
     border-radius: 0.5rem;
 }
 
@@ -21,13 +19,14 @@ h1 {
         background-color: rgb(119, 248, 248);
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 3fr;
+        grid-template-rows: 0.3fr 3fr;
     }
 
     /*Grid Elemente */
     .gameName {
         grid-area: 1/1/2/2;
-
+        z-index: 2;
+        position: relative;
         /*Styling Spielname*/
         font-size: 8vw;
         text-transform: uppercase;
@@ -78,8 +77,12 @@ h1 {
 
     #trennlinie {
         width: 100%;
-        height: 3px;
+        height: 2px;
         background-color: black;
+        position: absolute;
+        grid-area: 1/1/2/3;
+        top: 10rem;
+        
     }
 
     #question{
@@ -131,10 +134,26 @@ h1 {
     /* Ende Navigationsmenü*/
     /* Ende Anordnung der Elemente*/
 
+
     #marble{
         opacity: 60%;
         position: absolute;
-        
+        width:200px;
+        height:200px;
+        overflow: hidden;
+        margin-left: 70vw;
+        border-radius: 50%;
+        top:10px;
+        left:-25rem;
+        z-index: 0;
+        size: 60%;
     }
+    #marbleImage {
+        margin-left: -150px;
+        margin-top:-20px;
+        height: 400px;
+        width: 400px;
+    }
+
 
 }
