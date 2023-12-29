@@ -111,7 +111,7 @@ h1 {
     .bar {
         width: 25px;
         height: 3px;
-        background-color: rgb(133, 29, 29);
+        background-color: rgb(255, 255, 255);
         margin: 4px 0;
         transition: 0.4s;
     }
