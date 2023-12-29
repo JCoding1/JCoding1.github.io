@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     burgerIcon.addEventListener('click', function () {
       navLinks.classList.toggle('show');
     });
-    burgerIcon.addEventListener('touchstart', function () {
+    burgerIcon.addEventListener('touchend', function () {
         navLinks.classList.toggle('show');
       });
   });
