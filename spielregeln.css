@@ -2,7 +2,6 @@
 /* Universalselektor */
 * {
     font-family: Arial, Verdana, sans-serif;
-    text-align: center;
     font-size: 1rem;
     padding: 0;
     border-radius: 0.5rem;
@@ -10,7 +9,7 @@
 
 
 body {
-    background-color: cyan;
+    background-color: rgb(119, 248, 248);
     color: black;
     font-family: Arial, sans-serif;
     margin: 0;
@@ -33,14 +32,33 @@ div {
 h1 {
     font-size: 2em;
     margin-bottom: 10px;
+    margin: auto;
+text-decoration: underline;
+text-align: center;
 }
 
-#heading {
-margin: auto;
-}
 
 p {
     font-size: 1.2em;
     line-height: 1.4;
     margin-bottom: 15px;
+}
+
+#returnLink {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    margin-bottom: 10px;
+    top: 20px;
+    left: 10px;
+    font-weight: 900;
+  }
+
+#regeln{
+    margin-top: 2rem;
+}
+
+#regeln p {
+    margin-top: 2rem;
+    font-weight: 600;
 }

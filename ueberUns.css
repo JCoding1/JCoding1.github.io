@@ -4,22 +4,24 @@
     text-align: center;
     font-size: 1rem;
     padding: 0;
-    border-radius: 0.5rem;
+
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: cyan; /* Änderung hier: Cyan Hintergrund */
-    color: black; /* Änderung hier: Schwarzer Text */
+    background-color: rgb(119, 248, 248);
+    color: black;
 }
 
 header {
-    background-color: #333;
+    margin-top: 50px;
+    background-color: #a74ef1;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 5px;
+
 }
 
 section.member {
@@ -27,12 +29,37 @@ section.member {
     justify-content: center;
     align-items: center;
     margin: 20px;
+    margin-bottom: 4rem;
 }
 
-img {
+.member div p p {
+    font-weight: 400;
+}
+
+#teambild {
     max-width: 200px;
-    border-radius: 50%;
+    border-radius: 40%;
     margin-right: 20px;
+}
+
+.paypal img {
+    max-height: 200px;
+    max-width: 200px;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    margin: auto;
+    position: relative;
+}
+
+
+#paypalLink {
+    color: black;
+    background-color: #4e77f1;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 0.5rem;
+    margin: auto;
+    position: relative;
 }
 
 .member-info {
@@ -40,11 +67,21 @@ img {
 }
 
 footer {
-    background-color: #333;
+    background-color: #a74ef1;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+#returnLink {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    margin-bottom: 10px;
+    top: 20px;
+    left: 10px;
+    font-weight: 900;
 }
