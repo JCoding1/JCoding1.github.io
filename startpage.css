@@ -11,38 +11,47 @@ h1 {
     font-size: 1.5rem;
 }
 
+.startButton {
+    background-color: #a74ef1;
+    padding: 10px;
+    border: none;
+}
+
+.startButton>a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+body {
+    background-color: rgb(119, 248, 248);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.3fr 3fr;
+}
+
+/*Grid Elemente */
+.gameName {
+    grid-area: 1/1/2/2;
+    z-index: 3;
+    position: relative;
+    /*Styling Spielname*/
+    font-size: 8vw;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    font-weight: 900;
+    font-family: 'Work sans', sans-serif;
+    color: white;
+    /*Ende Styling Spielname*/
+}
 
 /*Anordnung der Elemente für Mobile Devices*/
 @media only screen and (max-width: 768px) {
 
-    body {
-        background-color: rgb(119, 248, 248);
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 0.3fr 3fr;
-    }
 
-    /*Grid Elemente */
-    .gameName {
-        grid-area: 1/1/2/2;
-        z-index: 3;
-        position: relative;
-        /*Styling Spielname*/
-        font-size: 8vw;
-        text-transform: uppercase;
-        text-align: center;
-        line-height: 1;
-        font-weight: 900;
-        font-family: 'Work sans', sans-serif;
-        color: white;
-        /*Ende Styling Spielname*/
-    }
 
-    /* TODO: Entfernen #navigation {
-        grid-area: 1/2/2/3;
-        margin-left: 25vw;
-        margin-top: 8vw;
-    } */
 
     main {
         margin-top: 1.5rem;
@@ -51,17 +60,8 @@ h1 {
 
     /*Grid Elemente Ende*/
 
-    .startButton {
-        background-color: #a74ef1;
-        padding: 10px;
-        border: none;
-    }
-
-    .startButton>a {
-        text-decoration: none;
-        color: white;
-        font-size: 1.2rem;
-        font-weight: 400;
+    #desktopNote{
+            display:none;
     }
 
     #heading {
@@ -87,6 +87,11 @@ h1 {
         z-index: 0;
         margin-left: -7px;
     }
+
+    /* Auch @media (min-device-width: 60rem) { */
+    /* Einstellungen, die erst bei einer Anzeige mit einer Breite von mindestens 40 Zeichen der Schriftgröße wirken */
+
+
 
     /* Navigationsmenü stylen und Effekt beim hovern*/
 
@@ -168,6 +173,83 @@ h1 {
         height: 200px;
         width: 200px;
     }
+}
 
+@media (min-width: 769px) {
+
+    body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gameName {
+        top: 0px;
+        left: 0px;
+        font-size: 5rem;
+        margin-top: 2rem;
+        margin-left: 20px;
+        text-align: left;
+    }
+
+
+    main {
+        display: none;
+    }
+
+    #trennlinie {
+        display: none;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    #desktopNote {
+        text-align: center;
+        font-size: 2rem;
+        margin: auto;
+        position: absolute;
+        text-align: center;
+        top: 30rem;
+        color: #ff0000;
+        font-weight: 900;
+        width: 100%;
+    }
+
+    #marble {
+        opacity: 100%;
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+        border-radius: 50%;
+        z-index: 1;
+        top: 10px;
+        left: 20px;
+        margin-left: 5vw;
+    }
+
+    #spielen{
+        display:none;
+    }
+
+    #marbleImage {
+        margin-left: -40px;
+        margin-top: -15px;
+        height: 400px;
+        width: 400px;
+    }
 
 }
