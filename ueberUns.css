@@ -3,8 +3,7 @@
     font-family: Arial, Verdana, sans-serif;
     text-align: center;
     font-size: 1rem;
-    padding: 0;
-
+    padding:10px;
 }
 
 body {
@@ -16,12 +15,11 @@ body {
 }
 
 header {
-    margin-top: 50px;
+    margin-top: 30px;
     background-color: #a74ef1;
     color: white;
     text-align: center;
     padding: 5px;
-
 }
 
 section.member {
@@ -29,7 +27,7 @@ section.member {
     justify-content: center;
     align-items: center;
     margin: 20px;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 }
 
 .member div p p {
@@ -64,16 +62,6 @@ section.member {
 
 .member-info {
     max-width: 400px;
-}
-
-footer {
-    background-color: #a74ef1;
-    color: white;
-    text-align: center;
-    padding: 5px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }
 
 #returnLink {
