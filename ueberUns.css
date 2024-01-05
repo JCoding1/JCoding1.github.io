@@ -58,6 +58,7 @@ section.member {
     border-radius: 0.5rem;
     margin: auto;
     position: relative;
+    font-weight: 900;
 }
 
 .member-info {
