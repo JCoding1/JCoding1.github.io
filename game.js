@@ -58,15 +58,15 @@ function updateTimer() {
     let currentTime = new Date().getTime();
     let elapsedTime = Math.floor((currentTime - startTime) / 1000);
     timer.textContent = 'Zeit: ' + elapsedTime + 's';
-    /*
-     if (elapsedTime >= 60) {
-         clearInterval(gameInterval);
-         clearInterval(animInterval);
-         window.removeEventListener('deviceorientation', handleOrientation);
-         alert('Verloren! Du warst zu langsam:(');
-         startGame();
-     }
-     */
+
+    if (elapsedTime >= 60) {
+        clearInterval(gameInterval);
+        clearInterval(animInterval);
+        window.removeEventListener('deviceorientation', handleOrientation);
+        alert('Verloren! Du warst zu langsam:(');
+        startGame();
+    }
+
 }
 
 function setHolePosition() {

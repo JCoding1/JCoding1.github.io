@@ -45,7 +45,6 @@ section.member {
 #teambild {
     width: 50%;
     max-width: 180px;
-    /* Maximalbreite für das Bild */
     border-radius: 40%;
     margin-right: 0;
     margin-bottom: 0;
@@ -53,9 +52,7 @@ section.member {
 
 .paypal img {
     width: 50%;
-    /* Verkleinere das PayPal-Bild auf 50% der Breite des Elterncontainers */
     max-width: 200px;
-    /* Maximalbreite für das Bild */
     margin-bottom: 0.5rem;
     border-radius: 0.5rem;
 }
