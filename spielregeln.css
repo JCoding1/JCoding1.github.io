@@ -63,3 +63,10 @@ p {
     margin-top: 2rem;
     font-weight: 600;
 }
+
+@media only screen and (max-width: 768px) {
+    #regeln p {
+        font-weight: 300;
+        text-align: left;
+    }
+}
